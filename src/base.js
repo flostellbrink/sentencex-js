@@ -199,7 +199,7 @@ export default class Language {
         // If the sentence has a length, yield the sentence
         // stripped of leading/trailing spaces.
         if (sentence.length) {
-          sentences.push(sentence.replace(/^ +| +$/, ''))
+          sentences.push(sentence)
         }
       }
     }
