@@ -162,3 +162,15 @@ const GLOBAL_SENTENCE_TERMINATORS = [
 ])
 
 export default GLOBAL_SENTENCE_TERMINATORS
+
+// Hand picked list of mid indicators of semantic termination
+export const GLOBAL_SENTENCE_MID_TERMINATORS = [
+  ';',
+  ':',
+]
+
+// Hand picked list of weak indicators of semantic termination
+export const GLOBAL_SENTENCE_WEAK_TERMINATORS = [
+  ',',
+  '،',
+]
