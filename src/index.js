@@ -29,6 +29,10 @@ export function segmentParentheses (language, text) {
   const className = getLanguageClass(language)
   class patched extends className {
     static quotesRegex = new RegExp('', 'g')
+    static sentenceBreakRegex = new RegExp(
+      `[${GLOBAL_SENTENCE_TERMINATORS.join('')}]+${className.trailingQuotesRegexStr}`,
+      'gu'
+    )
   }
   // eslint-disable-next-line new-cap
   return new patched().segment(text)
@@ -39,7 +43,7 @@ export function segmentMid (language, text) {
   class patched extends className {
     static quotesRegex = new RegExp('', 'g')
     static sentenceBreakRegex = new RegExp(
-      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).join('')}]+`,
+      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).join('')}]+${className.trailingQuotesRegexStr}`,
       'gu'
     )
     continueInNextWord (textAfterBoundary) {
@@ -56,7 +60,7 @@ export function segmentWeak (language, text) {
   class patched extends className {
     static quotesRegex = new RegExp('', 'g')
     static sentenceBreakRegex = new RegExp(
-      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).join('')}]+`,
+      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).join('')}]+${className.trailingQuotesRegexStr}`,
       'gu'
     )
     continueInNextWord (textAfterBoundary) {

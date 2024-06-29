@@ -35,6 +35,8 @@ export default class Language {
 
   static quotesRegex = new RegExp(`${Language.quotesRegexStr}+`, 'g')
 
+  static trailingQuotesRegexStr = `[${Object.entries(Language.quotePairs).flatMap(([left, right]) => [left, right]).map(quote => quote.trim()).join('')}]*`
+
   static parensRegex = /([\\(（<{\\[])(?:\\\1|.)*?[\\)\]}）]/g
   static emailRegex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}/g
 
