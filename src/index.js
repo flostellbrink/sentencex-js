@@ -24,6 +24,16 @@ export default function segment (language, text) {
   return new className().segment(text)
 }
 
+export function segmentFullRanges (language, text) {
+  const className = getLanguageClass(language)
+  class patched extends className {
+    isPunctuationBetweenQuotes() {
+      return true
+    }
+  }
+  // eslint-disable-next-line new-cap
+  return new patched().segment(text)
+}
 
 export function segmentParentheses (language, text) {
   const className = getLanguageClass(language)
