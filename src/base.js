@@ -44,6 +44,8 @@ export default class Language {
   static sentenceBreakRegex = Language.GLOBAL_SENTENCE_BOUNDARY_REGEX
   static abbreviationChar = '.'
 
+  static lastWordSeparatorRegex = /[\s\\.()\[\]{}<>“”‘’«»‹›„‟‛‚《》「」]+/
+
   constructor () {
     this.abbreviations = this.constructor.abbreviations
   }
@@ -77,7 +79,7 @@ export default class Language {
   }
 
   get_lastword (text) {
-    return text.split(/[\s\\.]+/).slice(-1)[0]
+    return text.split(this.constructor.lastWordSeparatorRegex).slice(-1)[0]
   }
 
   findBoundary (text, match) {
