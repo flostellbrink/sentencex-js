@@ -18,6 +18,7 @@ export default class Language {
     " '": "'", // Need a space before ' to avoid capturing don't , l'Avv etc
     '«': '»',
     '»': '«',
+    '»': '»', // Swedish style
     '‘': '’',
     '‚': '‚',
     '“': '”',
