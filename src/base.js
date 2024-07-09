@@ -31,7 +31,7 @@ export default class Language {
 
   static quotesRegex = new RegExp(`${Language.quotesRegexStr}+`, 'g')
 
-  static tailingPunctuationRegexStr = `[${Object.entries(Language.quotePairs).flatMap(([left, right]) => [left, right]).concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).map(punctuation => punctuation.trim()).join('')}]*`
+  static tailingPunctuationRegexStr = `[${Object.entries(Language.quotePairs).flatMap(([left, right]) => [left, right]).concat(GLOBAL_SENTENCE_TERMINATORS).concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).map(punctuation => punctuation.trim()).join('')}]*`
 
   static parensRegex = /([\\(（<{\\[])(?:\\\1|.)*?[\\)\]}）]/g
   static emailRegex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}/g
