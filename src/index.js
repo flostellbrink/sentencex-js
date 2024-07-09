@@ -40,7 +40,7 @@ export function segmentParentheses (language, text) {
   class patched extends className {
     static quotesRegex = new RegExp('', 'g')
     static sentenceBreakRegex = new RegExp(
-      `[${GLOBAL_SENTENCE_TERMINATORS.join('')}]+${className.trailingQuotesRegexStr}`,
+      `[${GLOBAL_SENTENCE_TERMINATORS.join('')}]+${className.tailingPunctuationRegexStr}`,
       'gu'
     )
   }
@@ -53,7 +53,7 @@ export function segmentMid (language, text) {
   class patched extends className {
     static quotesRegex = new RegExp('', 'g')
     static sentenceBreakRegex = new RegExp(
-      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).join('')}]+${className.trailingQuotesRegexStr}`,
+      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).join('')}]+${className.tailingPunctuationRegexStr}`,
       'gu'
     )
     continueInNextWord (textAfterBoundary) {
@@ -70,7 +70,7 @@ export function segmentWeak (language, text) {
   class patched extends className {
     static quotesRegex = new RegExp('', 'g')
     static sentenceBreakRegex = new RegExp(
-      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).join('')}]+${className.trailingQuotesRegexStr}`,
+      `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).join('')}]+${className.tailingPunctuationRegexStr}`,
       'gu'
     )
     continueInNextWord (textAfterBoundary) {

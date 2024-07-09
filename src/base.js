@@ -1,11 +1,6 @@
 import GLOBAL_SENTENCE_TERMINATORS from './terminators.js'
 
 export default class Language {
-  static GLOBAL_SENTENCE_BOUNDARY_REGEX = new RegExp(
-    `[${GLOBAL_SENTENCE_TERMINATORS.join('')}]+`,
-    'gu'
-  )
-
   static EXCLAMATION_WORDS = new Set(
     (
       '!Xũ !Kung ǃʼOǃKung !Xuun !Kung-Ekoka ǃHu ǃKhung ǃKu ǃung ǃXo ǃXû ǃXung ' +
@@ -36,13 +31,17 @@ export default class Language {
 
   static quotesRegex = new RegExp(`${Language.quotesRegexStr}+`, 'g')
 
-  static trailingQuotesRegexStr = `[${Object.entries(Language.quotePairs).flatMap(([left, right]) => [left, right]).map(quote => quote.trim()).join('')}]*`
+  static tailingPunctuationRegexStr = `[${Object.entries(Language.quotePairs).flatMap(([left, right]) => [left, right]).concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).map(punctuation => punctuation.trim()).join('')}]*`
 
   static parensRegex = /([\\(（<{\\[])(?:\\\1|.)*?[\\)\]}）]/g
   static emailRegex = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}/g
 
   static numberedReferenceRegex = /^(\[\d+])+/
-  static sentenceBreakRegex = Language.GLOBAL_SENTENCE_BOUNDARY_REGEX
+  static sentenceBreakRegex = new RegExp(
+    `[${GLOBAL_SENTENCE_TERMINATORS.join('')}]+${Language.tailingPunctuationRegexStr}`,
+    'gu'
+  )
+  
   static abbreviationChar = '.'
 
   static lastWordSeparatorRegex = /[\s\\.()\[\]{}<>“”‘’«»‹›„‟‛‚《》「」]+/
