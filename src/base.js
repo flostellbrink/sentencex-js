@@ -1,4 +1,4 @@
-import GLOBAL_SENTENCE_TERMINATORS from './terminators.js'
+import GLOBAL_SENTENCE_TERMINATORS, { GLOBAL_SENTENCE_MID_TERMINATORS, GLOBAL_SENTENCE_WEAK_TERMINATORS } from './terminators.js'
 
 export default class Language {
   static EXCLAMATION_WORDS = new Set(
