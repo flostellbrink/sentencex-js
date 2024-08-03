@@ -13,7 +13,6 @@ export default class Language {
     " '": "'", // Need a space before ' to avoid capturing don't , l'Avv etc
     '«': '»',
     '»': '«',
-    '»': '»', // Swedish style
     '‘': '’',
     '‚': '‚',
     '“': '”',
@@ -24,12 +23,6 @@ export default class Language {
     '《': '》',
     '「': '」'
   }
-
-  static quotesRegexStr = Object.entries(Language.quotePairs)
-    .map(([left, right]) => `${left}(\\n|.)*?${right}`)
-    .join('|')
-
-  static quotesRegex = new RegExp(`${Language.quotesRegexStr}+`, 'g')
 
   static tailingPunctuationRegexStr = `[()\\[\\]{}<>${Object.entries(Language.quotePairs).flatMap(([left, right]) => [left, right]).concat(GLOBAL_SENTENCE_TERMINATORS).concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).map(punctuation => punctuation.trim()).join('')}]*`
 
@@ -48,6 +41,12 @@ export default class Language {
 
   constructor () {
     this.abbreviations = this.constructor.abbreviations
+
+    const quotePairs = this.constructor.quotePairs
+    const quotesRegexStr = Object.entries(quotePairs)
+      .map(([left, right]) => `${left}(\\n|.)*?${right}`)
+      .join('|')
+    this.quotesRegex = this.quotesRegex ? new RegExp(`${quotesRegexStr}+`, 'g') : new RegExp('', 'g')
   }
 
   is_abbreviation (head, tail, seperator) {
@@ -120,7 +119,7 @@ export default class Language {
     const skippableRanges = []
 
     // Find matches using quotesRegex and add spans to skippableRanges
-    const quotesMatches = text.matchAll(this.constructor.quotesRegex)
+    const quotesMatches = text.matchAll(this.quotesRegex)
 
     for (const match of quotesMatches) {
       skippableRanges.push([match.index, match.index + match[0].length])

@@ -26,6 +26,7 @@ import Punjabi from './pa.js'
 import Russian from './ru.js'
 import Slovak from './sk.js'
 import Spanish from './es.js'
+import Swedish from './sv.js'
 import Tamil from './ta.js'
 import Telugu from './te.js'
 
@@ -58,6 +59,7 @@ export default {
   pt: Portuguese,
   ru: Russian,
   sk: Slovak,
+  sv: Swedish,
   ta: Tamil,
   te: Telugu
 }

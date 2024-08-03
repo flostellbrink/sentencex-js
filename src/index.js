@@ -38,7 +38,7 @@ export function segmentFullRanges (language, text) {
 export function segmentParentheses (language, text) {
   const className = getLanguageClass(language)
   class patched extends className {
-    static quotesRegex = new RegExp('', 'g')
+    static quotePairs = {}
     static sentenceBreakRegex = new RegExp(
       `[${GLOBAL_SENTENCE_TERMINATORS.join('')}]+${className.tailingPunctuationRegexStr}`,
       'gu'
@@ -51,7 +51,7 @@ export function segmentParentheses (language, text) {
 export function segmentMid (language, text) {
   const className = getLanguageClass(language)
   class patched extends className {
-    static quotesRegex = new RegExp('', 'g')
+    static quotePairs = {}
     static sentenceBreakRegex = new RegExp(
       `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).join('')}]+${className.tailingPunctuationRegexStr}`,
       'gu'
@@ -68,7 +68,7 @@ export function segmentMid (language, text) {
 export function segmentWeak (language, text) {
   const className = getLanguageClass(language)
   class patched extends className {
-    static quotesRegex = new RegExp('', 'g')
+    static quotePairs = {}
     static sentenceBreakRegex = new RegExp(
       `[${GLOBAL_SENTENCE_TERMINATORS.concat(GLOBAL_SENTENCE_MID_TERMINATORS).concat(GLOBAL_SENTENCE_WEAK_TERMINATORS).join('')}]+${className.tailingPunctuationRegexStr}`,
       'gu'
